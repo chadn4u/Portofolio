@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full-Stack Dev | AI Engineer | RAG, LLMs, Automation</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: '#00A3FF', secondary: '#7B42FF' },
+            borderRadius: {
+              none: '0px',
+              sm: '4px',
+              DEFAULT: '8px',
+              md: '12px',
+              lg: '16px',
+              xl: '20px',
+              '2xl': '24px',
+              '3xl': '32px',
+              full: '9999px',
+              button: '8px',
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^='ri-'])::before {
+        content: '\f3c2';
+      }
+
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+        background: linear-gradient(135deg, #0a0f1c 0%, #000000 100%);
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .orbitron {
+        font-family: 'Orbitron', sans-serif;
+      }
+
+      .hero-gradient-text {
+        background: linear-gradient(90deg, #00a3ff, #7b42ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .glassmorphism {
+        background: rgba(10, 15, 28, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .glow-border {
+        box-shadow: 0 0 15px rgba(0, 163, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .glow-border:hover {
+        box-shadow: 0 0 25px rgba(0, 163, 255, 0.8);
+      }
+
+      .skill-icon {
+        transition: all 0.3s ease;
+      }
+
+      .skill-icon:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(0, 163, 255, 0.6);
+      }
+
+      .project-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 163, 255, 0.1);
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        border: 1px solid rgba(0, 163, 255, 0.5);
+        box-shadow: 0 0 20px rgba(0, 163, 255, 0.3);
+      }
+
+      .project-overlay {
+        opacity: 0;
+        transition: all 0.3s ease;
+        background: rgba(10, 15, 28, 0.85);
+      }
+
+      .project-card:hover .project-overlay {
+        opacity: 1;
+      }
+
+      .form-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(0, 163, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus {
+        border: 1px solid rgba(0, 163, 255, 0.8);
+        box-shadow: 0 0 10px rgba(0, 163, 255, 0.3);
+      }
+
+      .social-icon {
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-3px);
+        color: #00a3ff;
+        box-shadow: 0 0 15px rgba(0, 163, 255, 0.5);
+      }
+
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .star {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        animation: twinkle var(--duration) infinite both;
+        opacity: 0;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: var(--opacity);
+        }
+      }
+
+      .section-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+      }
+
+      .section-reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .cursor-dot {
+        width: 5px;
+        height: 5px;
+        background-color: #00a3ff;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .cursor-outline {
+        width: 30px;
+        height: 30px;
+        border: 2px solid rgba(0, 163, 255, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transition: transform 0.1s;
+      }
+
+      .progress-bar {
+        height: 4px;
+        background: linear-gradient(90deg, #00a3ff, #7b42ff);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        width: 0%;
+      }
+
+      .menu-item {
+        position: relative;
+      }
+
+      .menu-item::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #00a3ff, #7b42ff);
+        transition: width 0.3s ease;
+      }
+
+      .menu-item:hover::after,
+      .menu-item.active::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block;
+        }
+
+        .menu {
+          position: fixed;
+          top: 70px;
+          right: -100%;
+          width: 70%;
+          height: calc(100vh - 70px);
+          background: rgba(10, 15, 28, 0.95);
+          backdrop-filter: blur(10px);
+          flex-direction: column;
+          padding: 2rem;
+          transition: right 0.3s ease;
+        }
+
+        .menu.active {
+          right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars"></div>
+    <div class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="glassmorphism fixed top-0 left-0 w-full z-50 py-4 px-6">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <!-- <a href="#" class="text-2xl font-['Pacifico'] text-white">logo</a> -->
+
+        <div class="menu flex items-center space-x-8 transition-all">
+          <a href="#home" class="menu-item text-white hover:text-primary"
+            >Home</a
+          >
+          <a href="#about" class="menu-item text-white hover:text-primary"
+            >About</a
+          >
+          <a href="#projects" class="menu-item text-white hover:text-primary"
+            >Projects</a
+          >
+          <a href="#contact" class="menu-item text-white hover:text-primary"
+            >Contact</a
+          >
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <a
+            href="#contact"
+            class="hidden md:block bg-transparent border border-primary text-primary hover:bg-primary hover:text-white py-2 px-6 !rounded-button whitespace-nowrap glow-border"
+            >Get in Touch</a
+          >
+          <button
+            class="hamburger w-10 h-10 flex items-center justify-center text-white"
+          >
+            <i class="ri-menu-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 pb-10 px-6">
+      <div
+        class="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center"
+      >
+        <div class="w-full md:w-3/5 mb-10 md:mb-0">
+          <h3 class="text-xl md:text-2xl mb-2 text-gray-300">
+            Hi, I'm Richard Mario
+          </h3>
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 orbitron hero-gradient-text"
+          >
+            Full-Stack Dev | AI Engineer | RAG, LLMs, Automation
+          </h1>
+          <p class="text-lg text-gray-300 mb-8 max-w-2xl">
+            I’m a full-stack dev who ships fast, scales smart, and builds with
+            purpose — from front-end UI to backend APIs. Whether it's real-time
+            chat, automation flows, or AI-enhanced features, I make products
+            work in the wild, not just in dev.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              class="bg-primary text-white py-3 px-8 !rounded-button whitespace-nowrap glow-border"
+              >View Projects</a
+            >
+            <a
+              href="#"
+              class="bg-transparent border border-primary text-primary hover:bg-primary hover:text-white py-3 px-8 !rounded-button whitespace-nowrap glow-border"
+              >Download CV</a
+            >
+          </div>
+        </div>
+        <div class="w-full md:w-2/5 flex justify-center">
+          <div class="relative w-64 h-64 md:w-80 md:h-80">
+            <div
+              style="
+                background-image: url('https://readdy.ai/api/search-image?query=futuristic%203D%20holographic%20avatar%20of%20AI%20engineer%2C%20blue%20glowing%20digital%20human%20head%20profile%20with%20circuit%20patterns%2C%20cyberpunk%20style%2C%20dark%20background%20with%20blue%20neon%20glow%2C%20high%20tech%2C%20digital%20art&width=800&height=800&seq=1&orientation=squarish');
+              "
+              class="w-full h-full bg-cover bg-center rounded-full border-2 border-primary glow-border"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 section-reveal">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2 orbitron text-center">
+          Welcome to my portfolio
+        </h2>
+        <div class="w-24 h-1 bg-primary mx-auto mb-12 rounded-full"></div>
+
+        <div class="flex flex-col md:flex-row gap-12">
+          <div class="w-full md:w-1/2">
+            <p class="text-lg mb-6 text-gray-300">
+              With over 8 years of experience in full-stack development, I’ve
+              helped businesses build real-world systems — from responsive UIs
+              and scalable APIs to backend automation that actually saves time.
+              My core strength is bridging clean frontend design with powerful
+              backend logic.
+            </p>
+            <p class="text-lg mb-6 text-gray-300">
+              I’ve worked on AI-powered chatbots, workflow automation engines,
+              RAG-based knowledge systems, and integrated platforms using tools
+              like Next.js, FastAPI, Redis, and Qdrant. I don’t just build apps
+              — I build systems that think and move.
+            </p>
+            <p class="text-lg text-gray-300">
+              When I’m not writing code, I’m usually experimenting with new
+              tech, optimizing workflows, or tweaking AI prompts just to see
+              what breaks. I like building stuff that works — and keeps working.
+            </p>
+          </div>
+
+          <div class="w-full md:w-1/2">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+              <!-- Next.js -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-nextjs-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">Next.js</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Node.js -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-nodejs-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">Node.js</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- FastAPI -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-terminal-box-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">FastAPI</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Redis -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-database-2-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">Redis</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- n8n -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-settings-5-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">n8n</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 90%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- LangChain -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-brain-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">LangChain</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 80%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Qdrant -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-box-3-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">Qdrant</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 80%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Tailwind CSS -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-css3-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">Tailwind CSS</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 95%"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- TypeScript -->
+              <div
+                class="skill-icon bg-opacity-10 bg-primary rounded-lg p-6 text-center"
+              >
+                <div
+                  class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-opacity-20 bg-primary rounded-full border border-primary"
+                >
+                  <i class="ri-code-box-fill ri-2x text-primary"></i>
+                </div>
+                <h3 class="text-lg font-medium mb-2">TypeScript</h3>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 section-reveal">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2 orbitron text-center">
+          Featured Projects
+        </h2>
+        <div class="w-24 h-1 bg-primary mx-auto mb-12 rounded-full"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div class="project-card rounded-lg overflow-hidden">
+            <div class="relative h-64">
+              <div
+                style="
+                  background-image: url('https://readdy.ai/api/search-image?query=futuristic%20AI%20chatbot%20interface%20with%20blue%20neon%20elements%2C%20dark%20theme%20UI%20design%2C%20conversation%20bubbles%2C%20natural%20language%20processing%20visualization%2C%20high%20tech%20dashboard%20with%20data%20analytics%2C%20cyberpunk%20style&width=600&height=400&seq=2&orientation=landscape');
+                "
+                class="w-full h-full bg-cover bg-center object-top"
+              ></div>
+              <div
+                class="project-overlay absolute inset-0 flex flex-col justify-center items-center p-6"
+              >
+                <h3 class="text-xl font-bold mb-2">
+                  Conversational AI Assistant
+                </h3>
+                <p class="text-gray-300 mb-4 text-center">
+                  Advanced NLP-powered chatbot with multi-language support and
+                  context awareness
+                </p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >BERT</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >FastAPI</span
+                  >
+                </div>
+                <a
+                  href="#"
+                  class="bg-primary text-white py-2 px-4 !rounded-button whitespace-nowrap glow-border"
+                  >View Project</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card rounded-lg overflow-hidden">
+            <div class="relative h-64">
+              <div
+                style="
+                  background-image: url('https://readdy.ai/api/search-image?query=futuristic%20data%20visualization%20dashboard%20with%20multiple%20charts%20and%20graphs%2C%20dark%20blue%20interface%20with%20glowing%20elements%2C%20big%20data%20analytics%20platform%2C%20AI%20monitoring%20system%20with%20metrics%20and%20KPIs%2C%20high%20tech%20UI&width=600&height=400&seq=3&orientation=landscape');
+                "
+                class="w-full h-full bg-cover bg-center object-top"
+              ></div>
+              <div
+                class="project-overlay absolute inset-0 flex flex-col justify-center items-center p-6"
+              >
+                <h3 class="text-xl font-bold mb-2">
+                  Predictive Analytics Platform
+                </h3>
+                <p class="text-gray-300 mb-4 text-center">
+                  Real-time data visualization and forecasting system for
+                  business intelligence
+                </p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >React</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >D3.js</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >TensorFlow</span
+                  >
+                </div>
+                <a
+                  href="#"
+                  class="bg-primary text-white py-2 px-4 !rounded-button whitespace-nowrap glow-border"
+                  >View Project</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card rounded-lg overflow-hidden">
+            <div class="relative h-64">
+              <div
+                style="
+                  background-image: url('https://readdy.ai/api/search-image?query=futuristic%20automated%20workflow%20system%20with%20robotic%20process%20automation%20visualization%2C%20digital%20transformation%20pipeline%2C%20AI%20workflow%20orchestration%2C%20blue%20neon%20connections%20between%20nodes%2C%20dark%20themed%20interface%20with%20glowing%20elements&width=600&height=400&seq=4&orientation=landscape');
+                "
+                class="w-full h-full bg-cover bg-center object-top"
+              ></div>
+              <div
+                class="project-overlay absolute inset-0 flex flex-col justify-center items-center p-6"
+              >
+                <h3 class="text-xl font-bold mb-2">
+                  Workflow Automation Engine
+                </h3>
+                <p class="text-gray-300 mb-4 text-center">
+                  Enterprise-grade automation platform for streamlining business
+                  processes
+                </p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Node.js</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Docker</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Kubernetes</span
+                  >
+                </div>
+                <a
+                  href="#"
+                  class="bg-primary text-white py-2 px-4 !rounded-button whitespace-nowrap glow-border"
+                  >View Project</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="project-card rounded-lg overflow-hidden">
+            <div class="relative h-64">
+              <div
+                style="
+                  background-image: url('https://readdy.ai/api/search-image?query=futuristic%20computer%20vision%20system%20analyzing%20video%20feeds%2C%20object%20detection%20and%20recognition%20interface%2C%20AI%20surveillance%20with%20bounding%20boxes%20and%20tracking%2C%20dark%20blue%20UI%20with%20data%20overlays%2C%20high%20tech%20monitoring%20system&width=600&height=400&seq=5&orientation=landscape');
+                "
+                class="w-full h-full bg-cover bg-center object-top"
+              ></div>
+              <div
+                class="project-overlay absolute inset-0 flex flex-col justify-center items-center p-6"
+              >
+                <h3 class="text-xl font-bold mb-2">Computer Vision System</h3>
+                <p class="text-gray-300 mb-4 text-center">
+                  Real-time object detection and tracking for security
+                  applications
+                </p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >OpenCV</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >YOLO</span
+                  >
+                </div>
+                <a
+                  href="#"
+                  class="bg-primary text-white py-2 px-4 !rounded-button whitespace-nowrap glow-border"
+                  >View Project</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="project-card rounded-lg overflow-hidden">
+            <div class="relative h-64">
+              <div
+                style="
+                  background-image: url('https://readdy.ai/api/search-image?query=futuristic%20recommendation%20engine%20interface%20with%20personalized%20content%20suggestions%2C%20AI-powered%20recommendation%20system%2C%20user%20preference%20analysis%20dashboard%2C%20dark%20blue%20UI%20with%20glowing%20elements%2C%20machine%20learning%20visualization&width=600&height=400&seq=6&orientation=landscape');
+                "
+                class="w-full h-full bg-cover bg-center object-top"
+              ></div>
+              <div
+                class="project-overlay absolute inset-0 flex flex-col justify-center items-center p-6"
+              >
+                <h3 class="text-xl font-bold mb-2">Recommendation Engine</h3>
+                <p class="text-gray-300 mb-4 text-center">
+                  Personalized content recommendation system using collaborative
+                  filtering
+                </p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Spark</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Flask</span
+                  >
+                </div>
+                <a
+                  href="#"
+                  class="bg-primary text-white py-2 px-4 !rounded-button whitespace-nowrap glow-border"
+                  >View Project</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 6 -->
+          <div class="project-card rounded-lg overflow-hidden">
+            <div class="relative h-64">
+              <div
+                style="
+                  background-image: url('https://readdy.ai/api/search-image?query=futuristic%20voice%20assistant%20interface%20with%20sound%20wave%20visualization%2C%20speech%20recognition%20system%2C%20voice%20command%20dashboard%2C%20dark%20blue%20UI%20with%20audio%20waveforms%20and%20spectrograms%2C%20high%20tech%20audio%20processing&width=600&height=400&seq=7&orientation=landscape');
+                "
+                class="w-full h-full bg-cover bg-center object-top"
+              ></div>
+              <div
+                class="project-overlay absolute inset-0 flex flex-col justify-center items-center p-6"
+              >
+                <h3 class="text-xl font-bold mb-2">Voice Recognition System</h3>
+                <p class="text-gray-300 mb-4 text-center">
+                  Advanced speech-to-text engine with noise cancellation and
+                  accent adaptation
+                </p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Python</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >Wav2Vec</span
+                  >
+                  <span
+                    class="text-xs bg-opacity-20 bg-primary text-primary px-3 py-1 rounded-full"
+                    >WebRTC</span
+                  >
+                </div>
+                <a
+                  href="#"
+                  class="bg-primary text-white py-2 px-4 !rounded-button whitespace-nowrap glow-border"
+                  >View Project</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 section-reveal">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2 orbitron text-center">
+          Get In Touch
+        </h2>
+        <div class="w-24 h-1 bg-primary mx-auto mb-12 rounded-full"></div>
+
+        <div class="flex flex-col md:flex-row gap-12">
+          <div class="w-full md:w-2/3 bg-opacity-10 bg-primary p-8 rounded-lg">
+            <form>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="name" class="block text-gray-300 mb-2"
+                    >Name</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full form-input bg-opacity-10 bg-primary border-none !rounded-button p-3 text-white"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label for="email" class="block text-gray-300 mb-2"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full form-input bg-opacity-10 bg-primary border-none !rounded-button p-3 text-white"
+                    placeholder="Your email"
+                  />
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="subject" class="block text-gray-300 mb-2"
+                  >Subject</label
+                >
+                <input
+                  type="text"
+                  id="subject"
+                  class="w-full form-input bg-opacity-10 bg-primary border-none !rounded-button p-3 text-white"
+                  placeholder="Subject"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="message" class="block text-gray-300 mb-2"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="w-full form-input bg-opacity-10 bg-primary border-none !rounded-button p-3 text-white"
+                  placeholder="Your message"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="bg-primary text-white py-3 px-8 !rounded-button whitespace-nowrap glow-border"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <div class="w-full md:w-1/3 bg-opacity-10 bg-primary p-8 rounded-lg">
+            <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+
+            <div class="flex items-start mb-6">
+              <div
+                class="w-10 h-10 flex items-center justify-center mr-4 bg-opacity-20 bg-primary rounded-full"
+              >
+                <i class="ri-mail-line text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-gray-300 mb-1">Email</h4>
+                <p class="text-white">chadpato@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-start mb-6">
+              <div
+                class="w-10 h-10 flex items-center justify-center mr-4 bg-opacity-20 bg-primary rounded-full"
+              >
+                <i class="ri-map-pin-line text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-gray-300 mb-1">Location</h4>
+                <p class="text-white">Jakarta, Indonesia</p>
+              </div>
+            </div>
+
+            <div class="flex items-start mb-10">
+              <div
+                class="w-10 h-10 flex items-center justify-center mr-4 bg-opacity-20 bg-primary rounded-full"
+              >
+                <i class="ri-time-line text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-gray-300 mb-1">Working Hours</h4>
+                <p class="text-white">Mon - Fri: 9:00 AM - 6:00 PM</p>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold mb-6">Follow Me</h3>
+            <div class="flex space-x-4">
+              <a
+                href="https://github.com/chadn4u"
+                class="social-icon w-10 h-10 flex items-center justify-center bg-opacity-20 bg-primary rounded-full"
+              >
+                <i class="ri-github-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center bg-opacity-20 bg-primary rounded-full"
+              >
+                <i class="ri-linkedin-fill"></i>
+              </a>
+              <!-- <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center bg-opacity-20 bg-primary rounded-full"
+              >
+                <i class="ri-twitter-x-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center bg-opacity-20 bg-primary rounded-full"
+              >
+                <i class="ri-instagram-fill"></i>
+              </a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gray-800">
+      <div
+        class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center"
+      >
+        <p class="text-gray-400 mb-4 md:mb-0">
+          © 2025 Richard Mario. All rights reserved.
+        </p>
+        <div class="flex space-x-6">
+          <a href="#home" class="text-gray-400 hover:text-primary">Home</a>
+          <a href="#about" class="text-gray-400 hover:text-primary">About</a>
+          <a href="#projects" class="text-gray-400 hover:text-primary"
+            >Projects</a
+          >
+          <a href="#contact" class="text-gray-400 hover:text-primary"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script id="starAnimation">
+      document.addEventListener('DOMContentLoaded', function () {
+        const starsContainer = document.querySelector('.stars');
+        const starCount = 150;
+
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement('div');
+          star.classList.add('star');
+
+          // Random size
+          const size = Math.random() * 2;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+
+          // Random position
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
+
+          // Random animation
+          star.style.setProperty('--duration', `${3 + Math.random() * 7}s`);
+          star.style.setProperty('--opacity', `${0.2 + Math.random() * 0.8}`);
+          star.style.animationDelay = `${Math.random() * 5}s`;
+
+          starsContainer.appendChild(star);
+        }
+      });
+    </script>
+
+    <script id="scrollAnimation">
+      document.addEventListener('DOMContentLoaded', function () {
+        const sections = document.querySelectorAll('.section-reveal');
+        const progressBar = document.querySelector('.progress-bar');
+
+        function checkScroll() {
+          // Update progress bar
+          const scrollPosition = window.scrollY;
+          const windowHeight = window.innerHeight;
+          const fullHeight = document.body.clientHeight - windowHeight;
+          const scrollPercentage = (scrollPosition / fullHeight) * 100;
+          progressBar.style.width = `${scrollPercentage}%`;
+
+          // Reveal sections
+          sections.forEach((section) => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < windowHeight * 0.8) {
+              section.classList.add('active');
+            }
+          });
+
+          // Update active menu item
+          const scrollPos = window.scrollY;
+          const menuItems = document.querySelectorAll('.menu-item');
+
+          document.querySelectorAll('section').forEach((section, index) => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+              scrollPos >= sectionTop &&
+              scrollPos < sectionTop + sectionHeight
+            ) {
+              menuItems.forEach((item) => item.classList.remove('active'));
+              menuItems[index].classList.add('active');
+            }
+          });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        checkScroll(); // Check on initial load
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 70,
+                behavior: 'smooth',
+              });
+
+              // Close mobile menu if open
+              const menu = document.querySelector('.menu');
+              if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+              }
+            }
+          });
+        });
+      });
+    </script>
+
+    <script id="mobileMenu">
+      document.addEventListener('DOMContentLoaded', function () {
+        const hamburger = document.querySelector('.hamburger');
+        const menu = document.querySelector('.menu');
+
+        hamburger.addEventListener('click', function () {
+          menu.classList.toggle('active');
+
+          // Change hamburger icon
+          const icon = hamburger.querySelector('i');
+          if (menu.classList.contains('active')) {
+            icon.classList.remove('ri-menu-line');
+            icon.classList.add('ri-close-line');
+          } else {
+            icon.classList.remove('ri-close-line');
+            icon.classList.add('ri-menu-line');
+          }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+          if (
+            !hamburger.contains(e.target) &&
+            !menu.contains(e.target) &&
+            menu.classList.contains('active')
+          ) {
+            menu.classList.remove('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.remove('ri-close-line');
+            icon.classList.add('ri-menu-line');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
