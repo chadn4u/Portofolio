@@ -1,0 +1,247 @@
+[
+  {
+    "id": "P-001",
+    "slug": "lottemart-platform",
+    "title": "Lotte Mart E-commerce Platform",
+    "tagline": "Full-stack B2B/B2C e-commerce dengan AI CS system, real-time delivery tracking & WhatsApp automation.",
+    "stack": ["Next.js", "FastAPI", "LangGraph", "GPT-4o", "Elasticsearch"],
+    "status": "live",
+    "users": "50k+",
+    "uptime": "99.9",
+    "visual": "chat",
+    "role": "Full-Stack Engineer (Sole)",
+    "year": "2022",
+    "duration": "3 yr+",
+    "client": "PT. Lotte Shopping Indonesia",
+    "problem": "Platform e-commerce Lotte Mart butuh upgrade menyeluruh — dari Flutter Web ke Next.js, integrasi payment gateway DOKU/Espay, real-time delivery via GrabExpress API, dan WhatsApp notifications. Ditambah tim CS kewalahan handle repetitive queries, butuh AI assistant yang ngerti konteks order.",
+    "challenges": [
+      "Migrasi Flutter Web → Next.js App Router dengan zero downtime, Core Web Vitals & SEO improvements terukur",
+      "Arsitektur AI CS system LOVA (LangGraph + GPT-4o-mini + WebSocket) — optimasi dari ~30K ke ~5K token/session (83% reduction)",
+      "Payment & delivery pipeline: DOKU/Espay webhook handlers + GrabExpress real-time tracking untuk 20–50 stores"
+    ],
+    "outcomes": [
+      { "v": "83%", "l": "Token Reduction", "s": "LOVA AI CS system (30K → 5K/session)", "green": true },
+      { "v": "50+", "l": "Stores Onboarded", "s": "Lotte Mart & Lotte Grosir branches", "green": false },
+      { "v": "3+", "l": "Years Running", "s": "production uptime 99.9%", "green": true },
+      { "v": "100%", "l": "Solo Ownership", "s": "UI, API, DevOps, Security", "green": false }
+    ],
+    "arch": [
+      { "lbl": "FRONTEND", "nodes": [{ "n": "Next.js 14", "hi": "hi" }, { "n": "App Router" }] },
+      { "lbl": "AI / CS", "nodes": [{ "n": "LangGraph", "hi": "lime" }, { "n": "GPT-4o-mini" }, { "n": "WebSocket" }] },
+      { "lbl": "BACKEND", "nodes": [{ "n": "FastAPI", "hi": "hi" }, { "n": "Node.js" }] },
+      { "lbl": "SEARCH", "nodes": [{ "n": "Elasticsearch" }, { "n": "WA Business API" }] },
+      { "lbl": "PAYMENT", "nodes": [{ "n": "DOKU/Espay" }, { "n": "GrabExpress" }] }
+    ],
+    "liveUrl": "https://order.lottemart.co.id"
+  },
+  {
+    "id": "P-002",
+    "slug": "rml-store",
+    "title": "RML Store — Digital Goods Platform",
+    "tagline": "B2C SaaS platform untuk top-up games, e-wallets & vouchers — 3-service architecture on self-managed VPS.",
+    "stack": ["Next.js", "Fastify v5", "PostgreSQL", "Redis", "Supabase"],
+    "status": "shipping",
+    "users": "growing",
+    "uptime": "99.8",
+    "visual": "reco",
+    "role": "Solo Developer · Owner",
+    "year": "2024",
+    "duration": "1 yr+",
+    "client": "Self-funded · B2C (raiwa.id)",
+    "problem": "Butuh platform digital goods yang scalable, bisa handle ribuan SKU dari multiple suppliers, dengan automated catalog ingestion dan proper cashback/voucher lifecycle — semua dijalankan sendiri di VPS tanpa tim.",
+    "challenges": [
+      "3-service architecture: rml-web (Next.js), rml-core (Fastify v5 + worker), rml-admin — deployed di Contabo VPS dengan Nginx reverse proxy + SSL/Certbot",
+      "Lapakgaming supplier API integration: 4-step import modal, Auto Best Supplier toggling, per-variant pricing management",
+      "Nginx config: security headers, rate limiting, forced IPv4 DNS resolution to bypass Cloudflare blocking supplier APIs"
+    ],
+    "outcomes": [
+      { "v": "3", "l": "Microservices", "s": "web, core, admin — single VPS", "green": true },
+      { "v": "v1.6", "l": "DB Schema", "s": "catalog_items, variants, suppliers", "green": false },
+      { "v": "OAuth", "l": "Auth System", "s": "Google OAuth via Supabase + admin service-role", "green": true },
+      { "v": "100%", "l": "Self-Managed", "s": "Nginx + PM2 + SSL/Certbot", "green": false }
+    ],
+    "arch": [
+      { "lbl": "FRONTEND", "nodes": [{ "n": "Next.js", "hi": "hi" }, { "n": "rml-admin" }] },
+      { "lbl": "AUTH", "nodes": [{ "n": "Supabase", "hi": "lime" }, { "n": "Google OAuth" }] },
+      { "lbl": "API", "nodes": [{ "n": "Fastify v5", "hi": "hi" }, { "n": "Worker" }] },
+      { "lbl": "DATA", "nodes": [{ "n": "PostgreSQL" }, { "n": "Redis" }, { "n": "Supabase Storage" }] },
+      { "lbl": "INFRA", "nodes": [{ "n": "Nginx" }, { "n": "PM2" }, { "n": "Contabo VPS" }] }
+    ],
+    "liveUrl": "https://raiwa.id"
+  },
+  {
+    "id": "P-003",
+    "slug": "lottemart-point-app",
+    "title": "Lotte Mart Point App",
+    "tagline": "Mobile loyalty app untuk point redemption, e-vouchers & promotions — 100K+ users di Play Store & App Store.",
+    "stack": ["Flutter", "Kotlin", "Android", "iOS", "Node.js"],
+    "status": "live",
+    "users": "100k+",
+    "uptime": "99.5",
+    "visual": "chart",
+    "role": "IT Programmer - Senior Staff",
+    "year": "2021",
+    "duration": "2 yr",
+    "client": "PT. Lotte Shopping Indonesia",
+    "problem": "Lotte Mart butuh loyalty app yang bisa handle point redemption, e-vouchers, dan promotions untuk ratusan ribu member di seluruh cabang Indonesia — tersedia di Android & iOS dengan pengalaman yang smooth.",
+    "challenges": [
+      "Cross-platform development Flutter + Kotlin Native untuk fitur platform-spesifik (push notifications, barcode scanner)",
+      "Skalabilitas: handle 100K+ registered users dengan high-availability backend dan real-time point calculation",
+      "OneSignal integration untuk targeted push notifications berdasarkan tier member dan lokasi cabang"
+    ],
+    "outcomes": [
+      { "v": "100K+", "l": "Registered Users", "s": "Google Play & App Store combined", "green": true },
+      { "v": "2", "l": "Platforms", "s": "Android & iOS published", "green": false },
+      { "v": "Real-time", "l": "Point System", "s": "instant redemption & voucher validation", "green": true },
+      { "v": "Push", "l": "Notifications", "s": "OneSignal targeted by member tier", "green": false }
+    ],
+    "arch": [
+      { "lbl": "MOBILE", "nodes": [{ "n": "Flutter", "hi": "hi" }, { "n": "Kotlin Native" }] },
+      { "lbl": "NOTIF", "nodes": [{ "n": "OneSignal", "hi": "lime" }] },
+      { "lbl": "API", "nodes": [{ "n": "Node.js", "hi": "hi" }] },
+      { "lbl": "DATA", "nodes": [{ "n": "Oracle DB" }, { "n": "PL/SQL" }] },
+      { "lbl": "STORE", "nodes": [{ "n": "Play Store" }, { "n": "App Store" }] }
+    ],
+    "storeUrls": {
+      "play": "https://play.google.com/store/apps/details?id=com.lotte.lpoint",
+      "apple": "https://apps.apple.com/id/app/lotte-mart-point/id1559700725"
+    }
+  },
+  {
+    "id": "P-004",
+    "slug": "floree",
+    "title": "Floree — Florist Platform",
+    "tagline": "Website penjualan bunga florist dengan storefront + CMS Dashboard — full Next.js stack.",
+    "stack": ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"],
+    "status": "shipping",
+    "users": "beta",
+    "uptime": "99.9",
+    "visual": "reco",
+    "role": "Solo Developer · Owner",
+    "year": "2025",
+    "duration": "ongoing",
+    "client": "Personal Project",
+    "problem": "Platform penjualan bunga florist yang butuh dua sisi: storefront yang cantik dan fast untuk customer browsing & order bunga, plus CMS Dashboard untuk florist manage produk, kategori, order, dan konten — semua dalam satu ekosistem Next.js.",
+    "challenges": [
+      "Desain storefront yang visually appealing sesuai aesthetic florist — responsive di semua device dengan image-heavy catalog",
+      "CMS Dashboard yang intuitif untuk florist yang tidak technical — manage produk, variants, upload foto, kelola order",
+      "Arsitektur monorepo atau multi-app Next.js: floree-frontend (storefront) + floree-cms (dashboard) dengan shared types"
+    ],
+    "outcomes": [
+      { "v": "2", "l": "Apps", "s": "storefront + CMS dashboard", "green": true },
+      { "v": "Full", "l": "CMS", "s": "products, orders, content management", "green": false },
+      { "v": "Fast", "l": "Storefront", "s": "image-optimized, responsive catalog", "green": true },
+      { "v": "Next.js", "l": "Full Stack", "s": "frontend + backend in one ecosystem", "green": false }
+    ],
+    "arch": [
+      { "lbl": "STOREFRONT", "nodes": [{ "n": "Next.js", "hi": "hi" }, { "n": "Tailwind CSS" }] },
+      { "lbl": "CMS", "nodes": [{ "n": "Next.js Admin", "hi": "lime" }, { "n": "Dashboard" }] },
+      { "lbl": "API", "nodes": [{ "n": "API Routes" }, { "n": "Server Actions" }] },
+      { "lbl": "DATA", "nodes": [{ "n": "PostgreSQL" }, { "n": "Image Storage" }] },
+      { "lbl": "DEPLOY", "nodes": [{ "n": "Vercel" }] }
+    ],
+    "liveUrl": "https://floree.id"
+  },
+  {
+    "id": "P-005",
+    "slug": "naomi-cardiac",
+    "title": "Naomi — Cardiac Monitoring App",
+    "tagline": "Remote patient monitoring system: Flutter mobile app + web dashboard untuk dokter spesialis jantung.",
+    "stack": ["Flutter", "Node.js", "MySQL", "WebSocket"],
+    "status": "live",
+    "users": "clinic",
+    "uptime": "99.7",
+    "visual": "vision",
+    "role": "Freelance Developer",
+    "year": "2024",
+    "duration": "3 mo",
+    "client": "Specialist Cardiologist",
+    "problem": "Dokter spesialis jantung butuh sistem monitoring pasien jarak jauh — pasien bisa log vitals dari mobile app, dokter pantau dari web dashboard, dengan appointment tracking dan komunikasi dokter-pasien yang terintegrasi.",
+    "challenges": [
+      "Real-time vitals sync antara Flutter mobile app dan Node.js web dashboard via WebSocket",
+      "Desain UX yang intuitif untuk pasien lansia — simple flow, large typography, minimal friction",
+      "Data integrity: vitals logging dengan timestamp akurat untuk keperluan rekam medis"
+    ],
+    "outcomes": [
+      { "v": "2", "l": "Platforms", "s": "Flutter mobile + Node.js web dashboard", "green": true },
+      { "v": "Real-time", "l": "Vitals Sync", "s": "WebSocket patient-doctor connection", "green": false },
+      { "v": "Full", "l": "Feature Set", "s": "vitals, appointments, messaging", "green": true },
+      { "v": "On-prem", "l": "Deployment", "s": "data stays in clinic", "green": false }
+    ],
+    "arch": [
+      { "lbl": "MOBILE", "nodes": [{ "n": "Flutter", "hi": "hi" }, { "n": "Vitals Logger" }] },
+      { "lbl": "REALTIME", "nodes": [{ "n": "WebSocket", "hi": "lime" }] },
+      { "lbl": "WEB", "nodes": [{ "n": "Node.js Dashboard" }] },
+      { "lbl": "DATA", "nodes": [{ "n": "MySQL" }] },
+      { "lbl": "OPS", "nodes": [{ "n": "Clinic Server" }] }
+    ]
+  },
+  {
+    "id": "P-006",
+    "slug": "jukir-parking",
+    "title": "Jukir — Cashless Parking App",
+    "tagline": "Aplikasi parkir cashless untuk Pemda Pekanbaru dengan e-payment, e-ticket & real-time collection reporting.",
+    "stack": ["Flutter", "PHP CodeIgniter", "MySQL", "Payment API"],
+    "status": "live",
+    "users": "aktif",
+    "uptime": "99.0",
+    "visual": "flow",
+    "role": "Freelance Developer",
+    "year": "2021",
+    "duration": "4 mo",
+    "client": "Dishub Pekanbaru, Riau (Pemda)",
+    "problem": "Dinas Perhubungan Kota Pekanbaru butuh digitalisasi sistem parkir tepi jalan — dari cash manual ke cashless digital, dengan e-ticket, digital payments, dan real-time collection reporting untuk target Rp 20M/hari pendapatan parkir.",
+    "challenges": [
+      "Integrasi multiple payment methods yang reliable di lapangan dengan koneksi internet yang tidak stabil",
+      "Real-time collection reporting untuk supervisor Dishub — live dashboard pendapatan per titik parkir",
+      "UX untuk juru parkir yang mayoritas tidak tech-savvy — training minimal, operasional langsung"
+    ],
+    "outcomes": [
+      { "v": "Rp 20M", "l": "Target Revenue/Day", "s": "Dishub Pekanbaru parking target", "green": true },
+      { "v": "Cashless", "l": "Payment System", "s": "digital payments + e-ticket", "green": false },
+      { "v": "Real-time", "l": "Reporting", "s": "live collection dashboard per spot", "green": true },
+      { "v": "Media", "l": "Coverage", "s": "suarapekanbaru.com coverage", "green": false }
+    ],
+    "arch": [
+      { "lbl": "MOBILE", "nodes": [{ "n": "Flutter", "hi": "hi" }, { "n": "E-Ticket" }] },
+      { "lbl": "PAYMENT", "nodes": [{ "n": "Payment API", "hi": "lime" }] },
+      { "lbl": "BACKEND", "nodes": [{ "n": "PHP CodeIgniter" }] },
+      { "lbl": "DATA", "nodes": [{ "n": "MySQL" }] },
+      { "lbl": "REPORT", "nodes": [{ "n": "Live Dashboard" }] }
+    ]
+  },
+  {
+    "id": "P-007",
+    "slug": "fristrim",
+    "title": "Fristrim — Film Streaming App",
+    "tagline": "Consumer Android film streaming app built with Java Native — published di Google Play Store (discontinued ~2019).",
+    "stack": ["Java Native", "Android", "PHP CodeIgniter", "MySQL", "CentOS 7"],
+    "status": "archived",
+    "users": "published",
+    "uptime": "—",
+    "visual": "vision",
+    "role": "Solo Developer",
+    "year": "2019",
+    "duration": "personal project",
+    "client": "Personal Project",
+    "problem": "Ingin belajar end-to-end Android development dengan membangun produk nyata — dari native Java Android app sampai backend PHP, lalu publish ke Google Play Store. Film streaming app dipilih karena kompleksitasnya: media playback, catalog management, user auth, dan server infrastructure.",
+    "challenges": [
+      "Native Java Android development — media player, adaptive streaming, background playback service",
+      "PHP CodeIgniter backend di CentOS 7 VPS — manage film catalog, user sessions, dan streaming endpoints",
+      "Google Play Store submission process — APK signing, store listing, content rating, policy compliance"
+    ],
+    "outcomes": [
+      { "v": "Published", "l": "Google Play Store", "s": "successfully listed & distributed", "green": true },
+      { "v": "Java", "l": "Native Android", "s": "full Android SDK, no cross-platform", "green": false },
+      { "v": "Full", "l": "Stack Solo", "s": "Android + PHP backend + VPS ops", "green": true },
+      { "v": "2019", "l": "Foundation", "s": "led to 8+ yr engineering career", "green": false }
+    ],
+    "arch": [
+      { "lbl": "MOBILE", "nodes": [{ "n": "Java Native", "hi": "hi" }, { "n": "Android SDK" }, { "n": "Media Player" }] },
+      { "lbl": "BACKEND", "nodes": [{ "n": "PHP CodeIgniter" }] },
+      { "lbl": "DATA", "nodes": [{ "n": "MySQL" }] },
+      { "lbl": "INFRA", "nodes": [{ "n": "CentOS 7 VPS", "hi": "lime" }] },
+      { "lbl": "DIST", "nodes": [{ "n": "Play Store" }] }
+    ]
+  }
+]
