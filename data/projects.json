@@ -292,5 +292,46 @@
       { "lbl": "INFRA", "nodes": [{ "n": "CentOS 7 VPS", "hi": "lime" }] },
       { "lbl": "DIST", "nodes": [{ "n": "Play Store" }] }
     ]
+  },
+  {
+    "id": "P-008",
+    "slug": "polymarket-btc-bot",
+    "title": "PolyMarket BTC UP/DOWN Bot",
+    "tagline": "Automated trading bot untuk Polymarket BTC 5-menit UP/DOWN markets — AI decision engine + Telegram monitoring, jalan 24/7.",
+    "stack": ["TypeScript", "Node.js", "GPT-4o", "Binance WS", "PM2"],
+    "status": "live",
+    "users": "private",
+    "uptime": "24/7",
+    "visual": "chart",
+    "role": "Solo Developer · Owner",
+    "year": "2024",
+    "duration": "ongoing",
+    "client": "Personal Project",
+    "problem": "Polymarket punya market BTC UP/DOWN setiap 5 menit — window sempit, perlu decision cepat yang mempertimbangkan price momentum, orderbook imbalance, sentiment berita, dan liquidation data secara bersamaan. Mustahil dilakukan manual 24/7.",
+    "challenges": [
+      "Multi-source data aggregation real-time: Binance WebSocket (tick data), CryptoPanic (news sentiment), Coinglass (liquidation + funding rate), Polymarket CLOB (orderbook + odds)",
+      "GPT-4o decision engine sebagai primary + rule-based fallback — output: { decision, confidence, reasoning } dengan confidence threshold sebelum eksekusi",
+      "5-menit cycle management: window detection dari Polymarket CLOB, signal processing dalam T+0:45s, eksekusi + monitoring via Telegram notification"
+    ],
+    "outcomes": [
+      { "v": "24/7", "l": "Autonomous", "s": "fully automated, no manual intervention", "green": true },
+      { "v": "GPT-4o", "l": "Decision Engine", "s": "AI + rule-based fallback", "green": false },
+      { "v": "4", "l": "Data Sources", "s": "Binance, CryptoPanic, Coinglass, CLOB", "green": true },
+      { "v": "5 min", "l": "Cycle Time", "s": "full signal-to-execution pipeline", "green": false }
+    ],
+    "arch": [
+      { "lbl": "INPUT", "nodes": [{ "n": "Binance WS" }, { "n": "CryptoPanic" }, { "n": "Coinglass" }, { "n": "Poly CLOB" }] },
+      { "lbl": "SIGNALS", "nodes": [{ "n": "Aggregator", "hi": "hi" }, { "n": "Momentum" }, { "n": "Sentiment" }] },
+      { "lbl": "DECISION", "nodes": [{ "n": "GPT-4o", "hi": "lime" }, { "n": "Rule Fallback" }] },
+      { "lbl": "EXECUTE", "nodes": [{ "n": "CLOB API", "hi": "hi" }, { "n": "Ethers / Viem" }] },
+      { "lbl": "OPS", "nodes": [{ "n": "Telegram Bot" }, { "n": "PM2" }, { "n": "VPS" }] }
+    ],
+    "tagline_en": "Automated trading bot for Polymarket BTC 5-minute UP/DOWN markets — AI decision engine + Telegram monitoring, running 24/7.",
+    "problem_en": "Polymarket runs BTC UP/DOWN markets every 5 minutes — tight windows requiring fast decisions that simultaneously consider price momentum, orderbook imbalance, news sentiment, and liquidation data. Impossible to do manually 24/7.",
+    "challenges_en": [
+      "Real-time multi-source data aggregation: Binance WebSocket (tick data), CryptoPanic (news sentiment), Coinglass (liquidation + funding rate), Polymarket CLOB (orderbook + odds)",
+      "GPT-4o as primary decision engine + rule-based fallback — output: { decision, confidence, reasoning } with confidence threshold before execution",
+      "5-minute cycle management: window detection from Polymarket CLOB, signal processing within T+0:45s, execution + monitoring via Telegram notifications"
+    ]
   }
 ]
