@@ -1,22 +1,23 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { useLang } from '@/context/LanguageContext'
+import { i18n } from '@/lib/i18n'
 
-const ROLES = [
-  'Full-Stack Engineer',
-  'AI Systems Builder',
-  'E-commerce Architect',
-  'Mobile App Developer',
-  'Production Shipper',
-]
+const ROLES_ID = ['Full-Stack Engineer', 'AI Systems Builder', 'E-commerce Architect', 'Mobile App Developer', 'Production Shipper']
+const ROLES_EN = ['Full-Stack Engineer', 'AI Systems Builder', 'E-commerce Architect', 'Mobile App Developer', 'Production Shipper']
 
 const STATS = [
-  { to: 8, label: 'Years_Shipping' },
-  { to: 15, label: 'Projects_Delivered' },
-  { to: 100, label: 'K_Users_Served' },
-  { to: 99, label: 'Uptime_Pct' },
+  { to: 8,   labelKey: 'Years_Shipping' },
+  { to: 15,  labelKey: 'Projects_Delivered' },
+  { to: 100, labelKey: 'K_Users_Served' },
+  { to: 99,  labelKey: 'Uptime_Pct' },
 ]
 
 export default function Hero() {
+  const { lang } = useLang()
+  const h = i18n.hero
+  const ROLES = lang === 'id' ? ROLES_ID : ROLES_EN
+
   const [typed, setTyped] = useState('')
   const [clock, setClock] = useState('--:--:--')
   const [llmCalls, setLlmCalls] = useState(312)
@@ -24,24 +25,29 @@ export default function Hero() {
   const statsRef = useRef<HTMLDivElement>(null)
   const [counts, setCounts] = useState(STATS.map(() => 0))
   const countsDone = useRef(false)
+  const roleRef = useRef({ rIdx: 0, cIdx: 0, deleting: false })
 
   useEffect(() => {
-    let rIdx = 0, cIdx = 0, deleting = false
     let timer: ReturnType<typeof setTimeout>
+    roleRef.current = { rIdx: 0, cIdx: 0, deleting: false }
     function tick() {
+      const { rIdx, cIdx, deleting } = roleRef.current
       const cur = ROLES[rIdx]
       if (!deleting) {
-        setTyped(cur.slice(0, cIdx + 1)); cIdx++
-        if (cIdx === cur.length) { deleting = true; timer = setTimeout(tick, 1400); return }
+        setTyped(cur.slice(0, cIdx + 1))
+        roleRef.current.cIdx++
+        if (cIdx + 1 === cur.length) { roleRef.current.deleting = true; timer = setTimeout(tick, 1400); return }
       } else {
-        setTyped(cur.slice(0, cIdx - 1)); cIdx--
-        if (cIdx === 0) { deleting = false; rIdx = (rIdx + 1) % ROLES.length }
+        setTyped(cur.slice(0, cIdx - 1))
+        roleRef.current.cIdx--
+        if (cIdx - 1 === 0) { roleRef.current.deleting = false; roleRef.current.rIdx = (rIdx + 1) % ROLES.length }
       }
-      timer = setTimeout(tick, deleting ? 35 : 70)
+      timer = setTimeout(tick, roleRef.current.deleting ? 35 : 70)
     }
     tick()
     return () => clearTimeout(timer)
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang])
 
   useEffect(() => {
     function update() {
@@ -87,7 +93,7 @@ export default function Hero() {
     <section id="home" className="hero">
       <div className="hero-left">
         <h3 className="mono">
-          <span className="blink" /> SYSTEM ONLINE · AVAILABLE FOR Q3/2026
+          <span className="blink" /> {h.badge[lang]}
         </h3>
         <h1>
           <span className="glitch" data-text="Richard">Richard</span>
@@ -95,25 +101,23 @@ export default function Hero() {
           <span className="accent">Mario.</span>
         </h1>
         <div className="role mono">
-          &gt; role: <span className="typed">{typed}</span><span className="caret" />
+          {h.role[lang]}<span className="typed">{typed}</span><span className="caret" />
         </div>
-        <p className="lede">
-          Versatile Full-Stack Engineer dengan <b>8+ tahun</b> membangun scalable web, mobile & AI-integrated systems. Spesialisasi: <b>Next.js/React frontends</b>, <b>Node.js/FastAPI backends</b>, dengan solid expertise di <b>PostgreSQL, Redis, Supabase</b>, dan third-party API integrations.
-        </p>
+        <p className="lede" dangerouslySetInnerHTML={{ __html: h.lede[lang] }} />
         <div className="cta-row">
           <a href="#projects" className="btn solid mono"
             onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) }}>
-            view_projects() <span className="arrow">→</span>
+            {h.cta1[lang]} <span className="arrow">→</span>
           </a>
           <a href="/cv.pdf" className="btn ghost mono">
-            <i className="ri-download-2-line" /> download_cv.pdf
+            <i className="ri-download-2-line" /> {h.cta2[lang]}
           </a>
         </div>
         <div className="stats" ref={statsRef}>
           {STATS.map((stat, i) => (
-            <div className="stat" key={stat.label}>
+            <div className="stat" key={stat.labelKey}>
               <div className="n">{counts[i]}</div>
-              <div className="l mono">{stat.label}</div>
+              <div className="l mono">{stat.labelKey}</div>
             </div>
           ))}
         </div>

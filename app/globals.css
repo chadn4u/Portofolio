@@ -88,6 +88,8 @@ nav.topbar {
 }
 .nav-cta:hover { background: var(--cy); color: #04060a; box-shadow: 0 0 24px rgba(34,211,238,.5); }
 .hamburger { display: none; background: none; border: 1px solid var(--line-strong); color: var(--fg); width: 38px; height: 38px; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; }
+.lang-toggle { font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 6px 11px; border: 1px solid var(--line-strong); color: var(--fg-dim); border-radius: 6px; background: transparent; cursor: pointer; transition: .2s; letter-spacing: .05em; }
+.lang-toggle:hover { border-color: var(--cy); color: var(--cy); }
 
 /* LAYOUT */
 main { position: relative; z-index: 1; }

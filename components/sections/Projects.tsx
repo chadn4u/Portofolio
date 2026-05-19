@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import type { Project, VisualKind } from '@/lib/types'
+import { useLang } from '@/context/LanguageContext'
+import { i18n } from '@/lib/i18n'
 
 function visualSVG(kind: VisualKind): string {
   switch (kind) {
@@ -16,6 +18,8 @@ function visualSVG(kind: VisualKind): string {
 interface Props { projects: Project[] }
 
 export default function Projects({ projects }: Props) {
+  const { lang } = useLang()
+  const p = i18n.projects
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [modal, setModal] = useState<Project | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -44,18 +48,18 @@ export default function Projects({ projects }: Props) {
   return (
     <>
       <section id="projects" className="reveal" ref={sectionRef}>
-        <span className="eyebrow mono">04 / Featured Builds</span>
+        <span className="eyebrow mono">{p.eyebrow[lang]}</span>
         <h2 className="title">
-          Selected <em>work</em> · <span className="mono" style={{ fontSize: '.5em', color: 'var(--fg-dim)', fontWeight: 400 }}>ls -la ./projects</span>
+          {p.title[lang]} <em>work</em> · <span className="mono" style={{ fontSize: '.5em', color: 'var(--fg-dim)', fontWeight: 400 }}>ls -la ./projects</span>
         </h2>
-        <p className="sub">Beberapa sistem yang gw bangun &amp; ship — production-grade, scalable, opinionated. Click any project untuk full case study.</p>
+        <p className="sub">{p.sub[lang]}</p>
 
         <div className="view-toggle">
           <button className={view === 'grid' ? 'active' : ''} onClick={() => setView('grid')}>
-            <i className="ri-layout-grid-line" /> grid_view
+            <i className="ri-layout-grid-line" /> {p.grid[lang]}
           </button>
           <button className={view === 'list' ? 'active' : ''} onClick={() => setView('list')}>
-            <i className="ri-terminal-line" /> terminal_list
+            <i className="ri-terminal-line" /> {p.list[lang]}
           </button>
         </div>
 
@@ -123,29 +127,29 @@ export default function Projects({ projects }: Props) {
               </button>
             </div>
             <div className="modal-body">
-              <span className="eyebrow mono">case study · {modal.id}</span>
+              <span className="eyebrow mono">{p.caseStudy[lang]} · {modal.id}</span>
               <h2>{modal.title}</h2>
-              <p className="lede">{modal.tagline}</p>
+              <p className="lede">{lang === 'en' && modal.tagline_en ? modal.tagline_en : modal.tagline}</p>
               <div className="case-meta">
-                <div className="item"><div className="l">role</div><div className="v">{modal.role}</div></div>
-                <div className="item"><div className="l">year</div><div className="v">{modal.year}</div></div>
-                <div className="item"><div className="l">duration</div><div className="v">{modal.duration}</div></div>
-                <div className="item"><div className="l">client</div><div className="v">{modal.client}</div></div>
+                <div className="item"><div className="l">{p.role[lang]}</div><div className="v">{modal.role}</div></div>
+                <div className="item"><div className="l">{p.year[lang]}</div><div className="v">{modal.year}</div></div>
+                <div className="item"><div className="l">{p.duration[lang]}</div><div className="v">{modal.duration}</div></div>
+                <div className="item"><div className="l">{p.client[lang]}</div><div className="v">{modal.client}</div></div>
               </div>
               <div className="case-grid">
                 <div>
                   <div className="case-section">
-                    <h4>The Problem</h4>
-                    <p>{modal.problem}</p>
+                    <h4>{p.problem[lang]}</h4>
+                    <p>{lang === 'en' && modal.problem_en ? modal.problem_en : modal.problem}</p>
                   </div>
                   <div className="case-section">
-                    <h4>Engineering Challenges</h4>
-                    <ul>{modal.challenges.map((c, i) => <li key={i}>{c}</li>)}</ul>
+                    <h4>{p.challenges[lang]}</h4>
+                    <ul>{(lang === 'en' && modal.challenges_en ? modal.challenges_en : modal.challenges).map((c, i) => <li key={i}>{c}</li>)}</ul>
                   </div>
                 </div>
                 <div>
                   <div className="case-section">
-                    <h4>Outcomes</h4>
+                    <h4>{p.outcomes[lang]}</h4>
                     <div className="outcomes">
                       {modal.outcomes.map((o, i) => (
                         <div className={`outcome${o.green ? ' green' : ''}`} key={i}>
@@ -157,13 +161,13 @@ export default function Projects({ projects }: Props) {
                     </div>
                   </div>
                   <div className="case-section">
-                    <h4>Full Stack</h4>
+                    <h4>{p.fullStack[lang]}</h4>
                     <div className="stack-grid">{modal.stack.map(s => <span key={s}>{s}</span>)}</div>
                   </div>
                 </div>
               </div>
               <div className="case-section">
-                <h4>Architecture</h4>
+                <h4>{p.arch[lang]}</h4>
                 <div className="arch">
                   <div className="arch-flow">
                     {modal.arch.map((layer, idx) => (
@@ -199,7 +203,7 @@ export default function Projects({ projects }: Props) {
                     live_demo() <span className="arrow">→</span>
                   </a>
                 ) : null}
-                <span className="mono" style={{ marginLeft: 'auto', color: 'var(--fg-muted)', fontSize: 12 }}>// last_updated: {modal.year}</span>
+                <span className="mono" style={{ marginLeft: 'auto', color: 'var(--fg-muted)', fontSize: 12 }}>{p.lastUpdated[lang]} {modal.year}</span>
               </div>
             </div>
           </div>

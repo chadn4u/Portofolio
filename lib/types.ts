@@ -38,4 +38,7 @@ export interface Project {
   arch: ArchLayer[]
   liveUrl?: string
   storeUrls?: { play?: string; apple?: string }
+  tagline_en?: string
+  problem_en?: string
+  challenges_en?: string[]
 }

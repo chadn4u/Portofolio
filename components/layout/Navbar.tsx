@@ -1,19 +1,16 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { useLang } from '@/context/LanguageContext'
+import { i18n } from '@/lib/i18n'
 
-const NAV_ITEMS = [
-  { id: 'home', idx: '01' },
-  { id: 'about', idx: '02' },
-  { id: 'stack', idx: '03' },
-  { id: 'projects', idx: '04' },
-  { id: 'contact', idx: '05' },
-]
-
+const NAV_IDS = ['home', 'about', 'stack', 'projects', 'contact']
 const TRACKED = ['home', 'about', 'projects', 'contact']
 
 export default function Navbar() {
+  const { lang, toggle } = useLang()
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeId, setActiveId] = useState('home')
+  const n = i18n.nav
 
   useEffect(() => {
     const progressEl = document.getElementById('progress')
@@ -39,6 +36,13 @@ export default function Navbar() {
     setMenuOpen(false)
   }
 
+  const navLabels: Record<string, { id: string; en: string }> = {
+    home: n.home, about: n.about, stack: n.stack, projects: n.projects, contact: n.contact,
+  }
+  const idxMap: Record<string, string> = {
+    home: '01', about: '02', stack: '03', projects: '04', contact: '05',
+  }
+
   return (
     <>
       <div className="progress"><i id="progress" /></div>
@@ -50,20 +54,23 @@ export default function Navbar() {
             <small>· v3.0.1</small>
           </a>
           <div className={`nav-links mono${menuOpen ? ' open' : ''}`}>
-            {NAV_ITEMS.map(({ id, idx }) => (
+            {NAV_IDS.map(id => (
               <a
                 key={id}
                 href={`#${id}`}
                 className={activeId === id ? 'active' : ''}
                 onClick={e => { e.preventDefault(); scrollTo(id) }}
               >
-                <span className="idx">{idx}</span>{id}
+                <span className="idx">{idxMap[id]}</span>{navLabels[id][lang]}
               </a>
             ))}
           </div>
           <a href="#contact" className="nav-cta" onClick={e => { e.preventDefault(); scrollTo('contact') }}>
-            ./connect.sh →
+            {n.cta[lang]}
           </a>
+          <button className="lang-toggle mono" onClick={toggle} aria-label="toggle language">
+            {lang === 'id' ? 'EN' : 'ID'}
+          </button>
           <button className="hamburger" aria-label="menu" onClick={() => setMenuOpen(o => !o)}>
             <i className={menuOpen ? 'ri-close-line' : 'ri-menu-line'} />
           </button>

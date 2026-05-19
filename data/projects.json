@@ -32,7 +32,14 @@
       { "lbl": "SEARCH", "nodes": [{ "n": "Elasticsearch" }, { "n": "WA Business API" }] },
       { "lbl": "PAYMENT", "nodes": [{ "n": "DOKU/Espay" }, { "n": "GrabExpress" }] }
     ],
-    "liveUrl": "https://order.lottemart.co.id"
+    "liveUrl": "https://order.lottemart.co.id",
+    "tagline_en": "Full-stack B2B/B2C e-commerce with AI CS system, real-time delivery tracking & WhatsApp automation.",
+    "problem_en": "Lotte Mart's e-commerce platform needed a full overhaul — migrating from Flutter Web to Next.js, integrating DOKU/Espay payment gateways, real-time delivery via GrabExpress API, and WhatsApp notifications. Plus, the CS team was overwhelmed by repetitive queries and needed an AI assistant that understood order context.",
+    "challenges_en": [
+      "Migrating Flutter Web → Next.js App Router with zero downtime, measurable Core Web Vitals & SEO improvements",
+      "Architecting LOVA AI CS system (LangGraph + GPT-4o-mini + WebSocket) — optimized from ~30K to ~5K tokens/session (83% reduction)",
+      "Payment & delivery pipeline: DOKU/Espay webhook handlers + GrabExpress real-time tracking across 20–50 stores"
+    ]
   },
   {
     "id": "P-002",
@@ -67,7 +74,14 @@
       { "lbl": "DATA", "nodes": [{ "n": "PostgreSQL" }, { "n": "Redis" }, { "n": "Supabase Storage" }] },
       { "lbl": "INFRA", "nodes": [{ "n": "Nginx" }, { "n": "PM2" }, { "n": "Contabo VPS" }] }
     ],
-    "liveUrl": "https://raiwa.id"
+    "liveUrl": "https://raiwa.id",
+    "tagline_en": "B2C SaaS platform for game top-ups, e-wallets & vouchers — 3-service architecture on a self-managed VPS.",
+    "problem_en": "Needed a scalable digital goods platform that handles thousands of SKUs from multiple suppliers with automated catalog ingestion and a proper cashback/voucher lifecycle — all operated solo on a VPS.",
+    "challenges_en": [
+      "3-service architecture: rml-web (Next.js), rml-core (Fastify v5 + worker), rml-admin — deployed on Contabo VPS with Nginx reverse proxy + SSL/Certbot",
+      "Lapakgaming supplier API integration: 4-step import modal, Auto Best Supplier toggling, per-variant pricing management",
+      "Nginx config: security headers, rate limiting, forced IPv4 DNS resolution to bypass Cloudflare blocking of supplier APIs"
+    ]
   },
   {
     "id": "P-003",
@@ -105,7 +119,14 @@
     "storeUrls": {
       "play": "https://play.google.com/store/apps/details?id=com.lotte.lpoint",
       "apple": "https://apps.apple.com/id/app/lotte-mart-point/id1559700725"
-    }
+    },
+    "tagline_en": "Mobile loyalty app for point redemption, e-vouchers & promotions — 100K+ users on Play Store & App Store.",
+    "problem_en": "Lotte Mart needed a loyalty app to handle point redemption, e-vouchers, and promotions for hundreds of thousands of members across all Indonesian branches — available on both Android & iOS.",
+    "challenges_en": [
+      "Cross-platform development with Flutter + Kotlin Native for platform-specific features (push notifications, barcode scanner)",
+      "Scalability: handling 100K+ registered users with a high-availability backend and real-time point calculation",
+      "OneSignal integration for targeted push notifications based on member tier and branch location"
+    ]
   },
   {
     "id": "P-004",
@@ -140,7 +161,14 @@
       { "lbl": "DATA", "nodes": [{ "n": "PostgreSQL" }, { "n": "Image Storage" }] },
       { "lbl": "DEPLOY", "nodes": [{ "n": "Vercel" }] }
     ],
-    "liveUrl": "https://floree.id"
+    "liveUrl": "https://floree.id",
+    "tagline_en": "Florist sales website with a customer storefront + CMS Dashboard — full Next.js stack.",
+    "problem_en": "A florist platform needs two sides: a beautiful, fast storefront for customers to browse & order flowers, plus a CMS Dashboard for the florist to manage products, categories, orders, and content — all within a single Next.js ecosystem.",
+    "challenges_en": [
+      "Visually appealing storefront matching the florist aesthetic — responsive on all devices with an image-heavy catalog",
+      "Intuitive CMS Dashboard for non-technical florists — manage products, variants, photo uploads, and orders",
+      "Multi-app Next.js architecture: floree-frontend (storefront) + floree-cms (dashboard) with shared types"
+    ]
   },
   {
     "id": "P-005",
@@ -167,6 +195,13 @@
       { "v": "Real-time", "l": "Vitals Sync", "s": "WebSocket patient-doctor connection", "green": false },
       { "v": "Full", "l": "Feature Set", "s": "vitals, appointments, messaging", "green": true },
       { "v": "On-prem", "l": "Deployment", "s": "data stays in clinic", "green": false }
+    ],
+    "tagline_en": "Remote patient monitoring system: Flutter mobile app + web dashboard for a specialist cardiologist.",
+    "problem_en": "A specialist cardiologist needed a remote patient monitoring system — patients log vitals from a mobile app, the doctor monitors from a web dashboard, with integrated appointment tracking and doctor-patient communication.",
+    "challenges_en": [
+      "Real-time vitals sync between the Flutter mobile app and Node.js web dashboard via WebSocket",
+      "Intuitive UX design for elderly patients — simple flow, large typography, minimal friction",
+      "Data integrity: accurate timestamped vitals logging for medical record purposes"
     ],
     "arch": [
       { "lbl": "MOBILE", "nodes": [{ "n": "Flutter", "hi": "hi" }, { "n": "Vitals Logger" }] },
@@ -202,6 +237,13 @@
       { "v": "Real-time", "l": "Reporting", "s": "live collection dashboard per spot", "green": true },
       { "v": "Media", "l": "Coverage", "s": "suarapekanbaru.com coverage", "green": false }
     ],
+    "tagline_en": "Cashless parking app for Pekanbaru City Government with e-payment, e-ticket & real-time collection reporting.",
+    "problem_en": "The Pekanbaru City Transportation Agency needed to digitize its roadside parking system — from manual cash collection to digital cashless, with e-tickets, digital payments, and real-time reporting targeting Rp 20M/day in parking revenue.",
+    "challenges_en": [
+      "Reliable multi-method payment integration in the field with unstable internet connectivity",
+      "Real-time collection reporting for Dishub supervisors — live revenue dashboard per parking spot",
+      "UX for parking attendants who are mostly non-tech-savvy — minimal training, immediate operation"
+    ],
     "arch": [
       { "lbl": "MOBILE", "nodes": [{ "n": "Flutter", "hi": "hi" }, { "n": "E-Ticket" }] },
       { "lbl": "PAYMENT", "nodes": [{ "n": "Payment API", "hi": "lime" }] },
@@ -235,6 +277,13 @@
       { "v": "Java", "l": "Native Android", "s": "full Android SDK, no cross-platform", "green": false },
       { "v": "Full", "l": "Stack Solo", "s": "Android + PHP backend + VPS ops", "green": true },
       { "v": "2019", "l": "Foundation", "s": "led to 8+ yr engineering career", "green": false }
+    ],
+    "tagline_en": "Consumer Android film streaming app built with Java Native — published on Google Play Store (discontinued ~2019).",
+    "problem_en": "Wanted to learn end-to-end Android development by building a real product — from native Java Android app to PHP backend, then publishing on the Google Play Store. A film streaming app was chosen for its complexity: media playback, catalog management, user auth, and server infrastructure.",
+    "challenges_en": [
+      "Native Java Android development — media player, adaptive streaming, background playback service",
+      "PHP CodeIgniter backend on CentOS 7 VPS — managing film catalog, user sessions, and streaming endpoints",
+      "Google Play Store submission process — APK signing, store listing, content rating, policy compliance"
     ],
     "arch": [
       { "lbl": "MOBILE", "nodes": [{ "n": "Java Native", "hi": "hi" }, { "n": "Android SDK" }, { "n": "Media Player" }] },
